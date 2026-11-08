@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#101827" />
+  <title>Immersive Microcontroller Lab</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">μ</div><div><b>MICRO<span>LAB</span></b><small>IMMERSIVE LEARNING</small></div></div>
+      <div class="course-chip"><span class="pulse"></span> PRAKTIKUM DIGITAL</div>
+      <nav class="nav">
+        <button class="nav-item active" data-page="lab"><span>⌂</span> Laboratorium</button>
+        <button class="nav-item" data-page="guide"><span>▤</span> Panduan Belajar</button>
+        <button class="nav-item" data-page="ai"><span>✳</span> AI Practice Studio</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="progress-card"><div class="progress-head"><span>PROGRES BELAJAR</span><b id="progressText">1/4</b></div><div class="progress-track"><i id="progressBar"></i></div><small id="progressCaption">Mulai dari pengenalan komponen</small></div>
+        <div class="profile"><div class="avatar">WS</div><div><b>Mahasiswa</b><small>Mode belajar mandiri</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><div class="eyebrow">MATA KULIAH / MIKROKONTROLER DAN ANTARMUKA</div><h1>Immersive Microcontroller Lab</h1></div>
+        <div class="top-actions"><span class="status-pill"><i></i> 3D ENGINE READY</span><button class="help-btn" id="helpBtn" title="Petunjuk">?</button></div>
+      </header>
+
+      <section id="labPage" class="page active">
+        <div class="intro-row"><div><div class="section-kicker">LEARNING MODULE 01</div><h2>Kenali, rakit, dan uji rangkaian</h2><p>Eksplorasi Arduino Uno, LED, resistor, dan sensor ultrasonik dalam satu laboratorium virtual.</p></div><div class="time-card"><span>ESTIMASI WAKTU</span><b>15–20 <small>menit</small></b></div></div>
+        <div class="workspace-grid">
+          <section class="viewport-card">
+            <div class="viewport-head"><div><span class="live-dot"></span><b>VIRTUAL LABORATORY</b><small id="viewMode">DESKTOP 3D VIEW</small></div><div class="view-actions"><button id="resetView" class="icon-btn" title="Atur ulang tampilan">↺</button><button id="arBtn" class="mode-btn">◎ AR</button><button id="vrBtn" class="mode-btn">◉ VR</button></div></div>
+            <div id="sceneWrap" class="scene-wrap"><div id="sceneLoading">Menyiapkan laboratorium 3D…</div><div class="scene-hint">GESER UNTUK MEMUTAR · SCROLL UNTUK ZOOM · KLIK KOMPONEN</div><div class="component-tip" id="componentTip"><b id="tipTitle">Arduino Uno</b><span id="tipText">Klik komponen untuk mempelajari fungsinya.</span></div></div>
+            <div class="viewport-foot"><span><i class="legend-dot green"></i> Objek dapat dipilih</span><span><i class="legend-dot blue"></i> Simulasi interaktif</span><span>WebXR: perangkat kompatibel</span></div>
+          </section>
+          <aside class="control-column">
+            <section class="control-card"><div class="card-heading"><div><span class="section-kicker">INTERACTION 01</span><h3>Eksplorasi komponen</h3></div><span class="step-number">01</span></div><p class="muted">Pilih salah satu komponen pada laboratorium untuk melihat fungsi dan karakteristiknya.</p><div class="component-list">
+              <button class="component-row" data-component="arduino"><span class="part-icon board-icon">▰</span><span><b>Arduino Uno</b><small>Mikrokontroler utama</small></span><span>›</span></button>
+              <button class="component-row" data-component="led"><span class="part-icon led-icon">●</span><span><b>LED</b><small>Indikator keluaran</small></span><span>›</span></button>
+              <button class="component-row" data-component="resistor"><span class="part-icon resistor-icon">━</span><span><b>Resistor 220Ω</b><small>Pembatas arus</small></span><span>›</span></button>
+              <button class="component-row" data-component="ultrasonic"><span class="part-icon sensor-icon">◉</span><span><b>HC-SR04</b><small>Sensor jarak ultrasonik</small></span><span>›</span></button>
+            </div><div id="componentDetail" class="detail-box"><b>Arduino Uno</b><p>Board mikrokontroler yang memproses program dan mengendalikan perangkat input/output.</p></div></section>
+            <section class="control-card"><div class="card-heading"><div><span class="section-kicker">INTERACTION 02</span><h3>Uji rangkaian LED</h3></div><span class="step-number">02</span></div><p class="muted">Aktifkan keluaran digital untuk mengamati perubahan kondisi LED.</p><div class="led-status"><span class="led-indicator" id="ledIndicator"></span><div><b id="ledState">LED OFF</b><small>Simulasi pin digital 13</small></div><button class="toggle" id="ledToggle" aria-label="Nyalakan LED"><i></i></button></div><div class="formula">HIGH = 5V <span>·</span> LOW = 0V</div></section>
+            <section class="control-card"><div class="card-heading"><div><span class="section-kicker">INTERACTION 03</span><h3>Simulasi sensor jarak</h3></div><span class="step-number">03</span></div><p class="muted">Atur jarak objek untuk melihat pembacaan sensor ultrasonik.</p><div class="distance-readout"><b id="distanceValue">25</b><span>cm</span><em id="distanceLabel">Objek terdeteksi</em></div><input id="distanceSlider" type="range" min="2" max="200" value="25" /><div class="range-labels"><span>2 cm</span><span>200 cm</span></div><div class="sensor-result" id="sensorResult">Jarak aman: objek berada pada 25 cm.</div></section>
+          </aside>
+        </div>
+        <section class="bottom-grid">
+          <div class="learning-card"><div class="card-heading"><div><span class="section-kicker">KONTEKS LOKAL</span><h3>Monitoring lingkungan sekolah</h3></div><span class="local-tag">SUMATERA UTARA</span></div><p>Gunakan nilai gotong royong dan kepedulian terhadap air bersama sebagai konteks proyek. Mahasiswa menafsirkan pembacaan sensor pada bak penampungan sekolah dan menentukan kapan warga sekolah perlu melakukan pemeriksaan atau pengisian air.</p><button class="text-btn" id="scenarioBtn">Pelajari skenario →</button></div>
+          <div class="learning-card challenge-card"><div><span class="section-kicker">AI PRACTICE</span><h3>Tantangan adaptif</h3><p>Hasilkan latihan baru tentang rangkaian mikrokontroler sesuai tingkat kesulitan yang dipilih.</p></div><button class="primary-btn" id="openAI">✳ Buat latihan dengan GenAI</button></div>
+        </section>
+      </section>
+
+      <section id="guidePage" class="page"><div class="page-title"><span class="section-kicker">SELF-PACED LEARNING</span><h2>Panduan belajar mandiri</h2><p>Ikuti empat tahapan berikut untuk menyelesaikan modul praktikum.</p></div><div class="guide-list">
+        <article class="guide-step"><div class="guide-num">01</div><div><h3>Kenali komponen</h3><p>Amati board Arduino Uno, LED, resistor, dan sensor HC-SR04. Pilih tiap komponen untuk membaca fungsi dan perannya.</p><span class="tag">3 MENIT</span></div><button data-complete="0" class="complete-btn">Tandai selesai</button></article>
+        <article class="guide-step"><div class="guide-num">02</div><div><h3>Pahami hubungan rangkaian</h3><p>Pelajari hubungan pin digital, resistor pembatas arus, LED, serta prinsip kerja sensor ultrasonik.</p><span class="tag">4 MENIT</span></div><button data-complete="1" class="complete-btn">Tandai selesai</button></article>
+        <article class="guide-step"><div class="guide-num">03</div><div><h3>Uji dan analisis</h3><p>Gunakan sakelar LED dan slider jarak. Perhatikan bagaimana perubahan input memengaruhi keluaran sistem.</p><span class="tag">5 MENIT</span></div><button data-complete="2" class="complete-btn">Tandai selesai</button></article>
+        <article class="guide-step"><div class="guide-num">04</div><div><h3>Evaluasi dengan latihan adaptif</h3><p>Hasilkan soal baru, pilih jawaban, dan baca umpan balik untuk memperbaiki pemahaman.</p><span class="tag">5 MENIT</span></div><button data-complete="3" class="complete-btn">Tandai selesai</button></article>
+      </div></section>
+
+      <section id="aiPage" class="page"><div class="page-title"><span class="section-kicker">GENERATIVE AI LEARNING</span><h2>AI Practice Studio</h2><p>AI menyusun variasi skenario dan latihan visual berdasarkan topik, tingkat kesulitan, serta konteks yang dipilih.</p></div><div class="ai-layout"><section class="control-card ai-setup"><span class="section-kicker">PENGATURAN LATIHAN</span><h3>Rancang tantanganmu</h3><label>Topik latihan<select id="aiTopic"><option>Rangkaian LED dan resistor</option><option>Pin digital Arduino Uno</option><option>Sensor ultrasonik HC-SR04</option><option>Monitoring lingkungan sekolah</option></select></label><label>Tingkat kesulitan<select id="aiDifficulty"><option value="Dasar">Dasar</option><option value="Menengah" selected>Menengah</option><option value="Lanjut">Lanjut</option></select></label><label>Konteks kasus<select id="aiContext"><option>Praktikum laboratorium</option><option>Monitoring bak air sekolah melalui gotong royong</option><option>Proyek otomasi sederhana</option></select></label><button id="generateBtn" class="primary-btn full-btn">✳ Generate variasi latihan</button><p class="privacy-note">Kunci API hanya disimpan di server melalui file .env, bukan di browser.</p></section><section class="control-card quiz-card"><div class="card-heading"><div><span class="section-kicker">GENERATED CHALLENGE</span><h3>Latihan adaptif</h3></div><span class="ai-badge">AI</span></div><div id="quizArea" class="quiz-area"><div class="empty-ai"><div class="sparkle">✳</div><b>Belum ada latihan</b><p>Pilih topik dan tingkat kesulitan, lalu tekan Generate variasi latihan.</p></div></div></section></div></section>
+
+      <footer class="footer"><span>MICROLAB · MEDIA PEMBELAJARAN INTERAKTIF</span><span>Prototipe edukasi · versi 1.0</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <div class="modal-backdrop" id="modal"><div class="modal"><button class="modal-close" id="modalClose">×</button><span class="section-kicker">PETUNJUK APLIKASI</span><h2>Mulai dari laboratorium 3D</h2><p>Gunakan mouse untuk memutar dan memperbesar objek. Klik komponen atau gunakan daftar komponen. Coba sakelar LED dan slider sensor untuk menguji hubungan input-output.</p><p><b>AR:</b> buka melalui browser smartphone yang mendukung WebXR dan HTTPS. <b>VR:</b> gunakan headset/browser VR yang kompatibel. Jika perangkat tidak mendukung, gunakan tampilan 3D desktop.</p><button class="primary-btn" id="modalOk">Mengerti</button></div></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
